@@ -9,9 +9,10 @@ WORKDIR /comfyui
 RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 RUN pip3 install -r requirements.txt runpod requests
 
-# Téléchargement de tes modèles (tes liens corrigés)
+# CRÉATION DES DOSSIERS ET TÉLÉCHARGEMENT
 WORKDIR /comfyui/models
-RUN wget -O unet/z_image_turbo_bf16.safetensors "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_bf16.safetensors" && \
+RUN mkdir -p unet clip loras vae && \
+    wget -O unet/z_image_turbo_bf16.safetensors "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_bf16.safetensors" && \
     wget -O clip/qwen_3_4b.safetensors "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/text_encoders/qwen_3_4b.safetensors" && \
     wget -O loras/RealisticSnapshot-Zimage-Turbov5.safetensors "https://civitai.com/api/download/models/2867257?token=69dccb6698cfa66bc7bff0c1771619ff" && \
     wget -O vae/ae.safetensors "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/vae/ae.safetensors"
